@@ -17,24 +17,9 @@ public class MyController {
     @Autowired
     private CarService carService;
 
-
-    public List<Car> getCars () {
-        List<Car> cars = new ArrayList<>();
-        cars.add(new Car("BMW", "M5", "sedan"));
-        cars.add(new Car("BMW", "X5M", "SUV"));
-        cars.add(new Car("MB", "A-class", "hatchback"));
-        cars.add(new Car("Skoda", "Octavia", "liftback"));
-        cars.add(new Car("Audi", "RS5", "coupe"));
-        return cars;
-    }
-
-
-
     @RequestMapping(value = "/cars")
-    public String deleteEmployee(@RequestParam(value = "count",defaultValue = "5") int carsNumber, Model model) {
-
-        List<Car> upgradeCarsList = carService.getNumberOfCars(getCars(),carsNumber);
-        model.addAttribute("listCars", upgradeCarsList);
+    public String deleteEmployee(@RequestParam(value = "count",defaultValue = "5") Integer carsNumber, Model model) {
+        model.addAttribute("listCars", carService.getNumberOfCars(carService.getCars(), carsNumber));
 
         return "cars";
     }
